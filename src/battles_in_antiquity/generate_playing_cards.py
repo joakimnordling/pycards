@@ -2,6 +2,7 @@
 """
 import json
 from pathlib import Path
+from typing import List
 
 from PIL import Image, ImageDraw, ImageFont
 from pycards.gsheets import download_gsheets
@@ -20,7 +21,7 @@ CARD_JSON_PATH = Path("./data/playing_cards.json")
 OUTPUT_PATH = Path("data/playing_cards")
 
 
-def load_card_data() -> dict:
+def load_card_data() -> List[dict]:
     cards_df = download_gsheets(CARD_SHEET_ID, CARD_SHEET_NAME)
     print("printing the cards")
     print(cards_df)
