@@ -1,16 +1,9 @@
 """ Generate victory card images from card specification in CSV
 """
-import argparse
-import json
-import pandas as pd
 from pathlib import Path
-from PIL import Image, ImageDraw, ImageFont, ImageOps
+from PIL import Image, ImageDraw
 from pycards.gsheets import download_gsheets
-from pycards.render import (
-    scale_rxy_to_xy,
-    render_text_with_assets,
-    divide_text_to_lines,
-)
+from pycards.render import render_text_with_assets
 
 from assets import ASSETS
 from renderable_card import make_renderable_card
