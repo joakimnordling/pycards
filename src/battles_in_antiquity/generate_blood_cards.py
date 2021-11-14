@@ -5,7 +5,6 @@ from PIL import Image, ImageDraw
 from pycards.gsheets import download_gsheets
 from pycards.render import render_text_with_assets
 
-from assets import ASSETS
 from renderable_card import make_renderable_card
 
 
@@ -15,7 +14,7 @@ CARD_SHEET_NAME = "Blood_cards"
 OUTPUT_PATH = Path("data/blood_cards")
 
 
-def load_card_data():
+def load_card_data() -> dict:
     cards_df = download_gsheets(CARD_SHEET_ID, CARD_SHEET_NAME)
     print("printing the cards")
     print(cards_df)
