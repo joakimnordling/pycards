@@ -1,3 +1,6 @@
 __pycache__/
 *.py[cod]
 .idea
+
+src/battles_in_antiquity/data/*
+!src/battles_in_antiquity/data/examples/*
