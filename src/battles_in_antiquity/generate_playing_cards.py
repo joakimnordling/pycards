@@ -15,9 +15,9 @@ from renderable_card import make_renderable_card
 CARD_SHEET_ID = "1Q8gs-XEURbsVB43OSe1DDL_W3T7tPryzOr-oUkxydbE"
 CARD_SHEET_NAME = "Master"
 # Dump cards in JSON to this file, you can save it for versioning
-CARD_JSON_PATH = "./data/playing_cards.json"
+CARD_JSON_PATH = Path("./data/playing_cards.json")
 # Card images go to OUTPUT_PATH
-OUTPUT_PATH = "data/playing_cards"
+OUTPUT_PATH = Path("data/playing_cards")
 
 
 def load_card_data():
@@ -189,14 +189,20 @@ def render_card(card):
     render_achievement(card)
 
 
-cards = load_card_data()
-with open(CARD_JSON_PATH, "w") as outfile:
-    json.dump(cards, outfile)
-rcards = [make_renderable_card(card) for card in cards]
-# render each card
+def main():
+    cards = load_card_data()
+    CARD_JSON_PATH.write_text(
+        json.dumps(cards, indent=4, ensure_ascii=False), encoding="utf-8"
+    )
+    rcards = [make_renderable_card(card) for card in cards]
+    # render each card
 
-Path(OUTPUT_PATH).mkdir(parents=True, exist_ok=True)
-for card in rcards:
-    render_card(card)
-    img = card["_img"]
-    img.save(f"{OUTPUT_PATH}/card_{card['Number']}.png", "PNG")
+    OUTPUT_PATH.mkdir(parents=True, exist_ok=True)
+    for card in rcards:
+        render_card(card)
+        img = card["_img"]
+        img.save(OUTPUT_PATH / f"card_{card['Number']}.png", "PNG")
+
+
+if __name__ == "__main__":
+    main()
